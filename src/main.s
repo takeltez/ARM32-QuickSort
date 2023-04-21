@@ -4,6 +4,12 @@
 
 .text
 main:
+	cmp r0, #1
+	bhi _correct
+	bl print_err
+	b _exit
+
+_correct:
 	mov r4, #4
 	mov r6, r0
 
@@ -21,5 +27,6 @@ main:
 	mul r5, r6, r4
 	add sp, sp, r5
 
+_exit:
 	mov r7, #1
 	swi 0

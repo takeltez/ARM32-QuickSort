@@ -60,6 +60,16 @@ _out_of_output_loop:
 	pop {lr}
 	bx lr
 
+print_err:
+	push {lr}
+
+	ldr r0, =err_msg
+
+	bl printf
+
+	pop {lr}
+	bx lr
+
 .data
 size_msg:
 	.asciz "Size: %d\n"
@@ -69,3 +79,5 @@ arr_cont_msg:
 	.asciz "%d "
 nl_msg:
 	.asciz "\n"
+err_msg:
+	.asciz "Wrong array size\n"
