@@ -1,32 +1,37 @@
 .include "i_o.s"
+.include "quick_sort.s"
 
 .global main
 
 .text
 main:
-	cmp r0, #1
+	cmp r0, #2
 	bhi _correct
-	bl print_err
-	b _exit
+	b err_exit
 
 _correct:
-	mov r4, #4
-	mov r6, r0
+	mov r2, #4
 
-	mul r5, r6, r4
-	sub sp, sp, r5
+	mul r3, r0, r2
+	sub sp, sp, r3
 
-	bl input
-	bl output
+	bl d_in
 
-	mov r4, #4
+	mov r0, #0
+	ldr r1, [sp, #4]
+	sub r1, r1, #1
 
-	ldr r6, [sp]
-	add r6, r6, #1
+	bl quick_sort
 
-	mul r5, r6, r4
-	add sp, sp, r5
+	bl d_out
 
-_exit:
+	mov r2, #4
+
+	ldr r0, [sp, #4]
+	add r0, r0, #2
+
+	mul r3, r0, r2
+	add sp, sp, r3
+
 	mov r7, #1
 	swi 0
